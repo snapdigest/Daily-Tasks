@@ -111,28 +111,28 @@ public class DetailItemFragment extends Fragment {
         String transitionName = getArguments().getString(EXTRA_TRANSITION_CARD);
         //String transitionTitle = getArguments().getString(EXTRA_TRANSITION_TITLE);
 
-        textTitle = (TextView) view.findViewById(R.id.txtTitle2);
+        textTitle = view.findViewById(R.id.txtTitle2);
         textTitle.setText(itemList.getTitle());
-        textDescription = (TextView) view.findViewById(R.id.txtDescription2);
+        textDescription = view.findViewById(R.id.txtDescription2);
         textDescription.setText(itemList.getDescription());
-        fab2 = (TextView) view.findViewById(R.id.editbutton);
-        gotosuccess = (TextView) view.findViewById(R.id.gotosuccess);
+        fab2 = view.findViewById(R.id.editbutton);
+        gotosuccess = view.findViewById(R.id.gotosuccess);
         CardView card = view.findViewById(R.id.card1);
 
             card.setTransitionName(transitionName);
 
         //BottomAppBar bottom_app_bar = (BottomAppBar) getActivity().findViewById(R.id.bottom_app_bar);
         //((AppCompatActivity)getActivity()).setSupportActionBar(bottom_app_bar);
-        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar2);
+        Toolbar toolbar = getActivity().findViewById(R.id.toolbar2);
         ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayShowTitleEnabled(false);
         Drawable descriptionBackground = view.findViewById(R.id.descrback).getBackground();
         descriptionBackground.setAlpha(20);
         Drawable titleBackground = view.findViewById(R.id.titleback).getBackground();
         titleBackground.setAlpha(20);
-        textedit = (TextView) view.findViewById(R.id.descriptionedit);
+        textedit = view.findViewById(R.id.descriptionedit);
         textedit.setText(itemList.getDescription());
-        titleedit = (TextView) view.findViewById(R.id.titleedit);
+        titleedit = view.findViewById(R.id.titleedit);
         titleedit.setText(itemList.getTitle());
         final TextInputLayout textFieldtitle = view.findViewById(R.id.textFieldtitle);
         final TextInputLayout textFielddescr = view.findViewById(R.id.textFielddescr);
@@ -296,15 +296,7 @@ public class DetailItemFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
             case android.R.id.home:
-                //ActivityCompat.finishAfterTransition(getActivity());
-                //getFragmentManager().beginTransaction().remove(this).commit();
-                //getActivity().getSupportFragmentManager().beginTrasaction().remove(this).commit;
-                int col = getFragmentManager().getBackStackEntryCount();
                 fm.popBackStack();
-                //FragmentManager manager = getChildFragmentManager();
-                //manager.popBackStack();
-                //getActivity().getFragmentManager().popBackStack();
-                //getActivity().onBackPressed();
                 return true;
             case R.id.delete:
                 int pos = bundle.getInt(EXTRA_POSITION);

@@ -150,11 +150,11 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES) {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
                     ed.putString(THEME, "night");
-                    ed.commit();
+                    ed.apply();
                 } else {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
                     ed.putString(THEME, "day");
-                    ed.commit();
+                    ed.apply();
                 }
                 return true;
         }
@@ -169,42 +169,12 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     @Override
     public void onBackPressed() {
         FragmentManager fm = getSupportFragmentManager();
-        int col = getSupportFragmentManager().getPrimaryNavigationFragment().getFragmentManager().getBackStackEntryCount();
-        if(getSupportFragmentManager().getBackStackEntryCount() > 0) {
-            getSupportFragmentManager().popBackStack();
+        if(fm.getPrimaryNavigationFragment().getChildFragmentManager().getBackStackEntryCount() > 0) {
+            fm.popBackStack();
         }
         else {
             super.onBackPressed();
         }
-
-
-        /*
-        if (this.backPressedQ == 1)
-        {
-            this.backPressedQ = 0;
-            super.onBackPressed();
-        }
-        else
-        {
-            this.backPressedQ++;
-            FragmentManager fm = getSupportFragmentManager();
-            fm.popBackStack();
-        }
-
-        //Обнуление счётчика через 5 секунд
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable()
-        {
-            @Override
-            public void run()
-            {
-                // Do something after 5s = 5000ms
-                backPressedQ = 0;
-                //checkNew();
-            }
-        }, 5000);
-
-         */
     }
 
 }
