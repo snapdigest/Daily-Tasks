@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<transitionSet
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:transitionOrdering="together"
+    android:interpolator="@android:interpolator/fast_out_linear_in">
+
+    <!-- Start sliding to bottom all the views of the activity (except some) -->
+    <slide android:slideEdge="bottom"
+        android:duration="@integer/animation_duration">
+        <targets>
+            <target android:excludeId="@android:id/navigationBarBackground" />
+            <target android:excludeId="@android:id/statusBarBackground" />
+            <target android:excludeId="@+id/fab" />
+            <target android:excludeId="@+id/bar" />
+            <target android:excludeId="@+id/activity_detail_avatar" />
+        </targets>
+    </slide>
+
+    <!-- Start fading some views to make sure they disappear before the middle of the screen -->
+    <fade android:duration="@integer/animation_alpha_duration_return">
+        <targets>
+            <target android:targetId="@id/txtclose" />
+            <target android:targetId="@id/imageView" />
+            <target android:targetId="@id/txtTitle2" />
+            <target android:targetId="@id/txtDescription2" />
+        </targets>
+    </fade>
+
+</transitionSet>

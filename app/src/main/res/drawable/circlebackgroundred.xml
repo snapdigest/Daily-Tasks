@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+    <gradient android:startColor="?android:attr/colorSecondary" android:endColor="?android:attr/colorSecondary"  android:angle="-90.0"
+        tools:targetApi="n_mr1" />
+    <corners android:radius="2dip" />
+<padding
+android:bottom="5dip"
+android:left="5dip"
+android:right="5dip"
+android:top="5dip" />
+
+</shape>

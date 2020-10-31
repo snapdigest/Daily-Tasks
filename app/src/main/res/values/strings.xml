@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Daily Tasks</string>
+    <string name="title_home">Задачи</string>
+    <string name="title_target">Цели</string>
+    <string name="title_success">Выполнено</string>
+    <string name="title_setting">Настройки</string>
+    <string name="add_tasks">Добавление задачи</string>
+    <string name="transition_bar" translatable="false">transition_bar</string>
+    <string name="transition_fab" translatable="false">transition_fab</string>
+    <string name="chooser">Отправить сообщение через ...</string>
+    <string name="share">Поделиться</string>
+    <string name="edit">Редактирование</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="transition_name" translatable="false">name%1$d</string>
+    <!-- Preference Titles -->
+    <string name="theme_header">Тема</string>
+    <string name="language_header">Язык</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="language_title">Выбрать язык</string>
+
+    <!-- Sync Preferences -->
+    <string name="theme_title">Темная тема</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+</resources>

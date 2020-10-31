@@ -1,0 +1,10 @@
+<resources>
+    <!-- Reply Preference -->
+    <string-array name="reply_entries">
+        <item>Русский</item>
+    </string-array>
+
+    <string-array name="reply_values">
+        <item>russian</item>
+    </string-array>
+</resources>

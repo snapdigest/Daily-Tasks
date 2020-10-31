@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="350dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:elevation="24dp"
+    android:alpha="0.95"
+    android:background="@drawable/circlebackground"
+    android:paddingTop="4dp"
+    android:paddingRight="4dp"
+    android:paddingBottom="4dp"
+    android:paddingLeft="4dp">
+
+    <TextView
+        android:id="@+id/edit1"
+        android:layout_width="85dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:background="@drawable/circlebackgroundred"
+        android:fontFamily="@font/gooddog"
+        android:padding="4dp"
+        android:text="Edit"
+        android:textAlignment="center"
+        android:textColor="?android:attr/textColorPrimaryInverse"
+        android:textSize="20sp"
+        app:fontFamily="@font/gooddog"
+        app:layout_constraintEnd_toStartOf="@+id/success"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout2"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+    android:id="@+id/success"
+    android:layout_width="85dp"
+    android:layout_height="wrap_content"
+        android:background="@drawable/circlebackgroundred"
+    android:padding="4dp"
+    android:text="Success"
+        android:textSize="20sp"
+        android:textColor="?android:attr/textColorPrimaryInverse"
+    android:textAlignment="center"
+    android:layout_marginTop="5dp"
+    app:layout_constraintStart_toEndOf="@+id/edit1"
+    app:layout_constraintEnd_toStartOf="@+id/delete"
+    app:layout_constraintTop_toBottomOf="@+id/layout2"
+    tools:ignore="MissingConstraints"
+        android:fontFamily="@font/gooddog"
+        app:fontFamily="@font/gooddog"/>
+
+    <TextView
+        android:id="@+id/delete"
+        android:layout_width="85dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/circlebackgroundred"
+        android:padding="4dp"
+        android:text="Delete"
+        android:textColor="?android:attr/textColorPrimaryInverse"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/success"
+        app:layout_constraintTop_toBottomOf="@+id/layout2"
+        tools:ignore="MissingConstraints"
+        android:fontFamily="@font/gooddog"
+        app:fontFamily="@font/gooddog"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout1"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_margin="0dp"
+        android:background="@drawable/circlebackgroundred"
+        android:padding="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/txtclose"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="X"
+            android:textAlignment="center"
+            android:background="?android:attr/colorBackground"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:padding="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/edit1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layout1">
+
+        <TextView
+            android:id="@+id/edit2"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="1dp"
+            android:background="@drawable/circlebackground"
+            android:foregroundGravity="right"
+            android:padding="4dp"
+            android:text="OK"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RelativeLayout
+            android:id="@+id/layout4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="0dp"
+            tools:ignore="MissingConstraints">
+
+            <TextView
+                android:id="@+id/txt1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/mvideo"
+                android:padding="0dp"
+                android:singleLine="true"
+                android:text="Заголовок"
+                android:textAlignment="viewStart"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:fontFamily="@font/mvideo" />
+
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="33dp"
+                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789абвгдеёжзиклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ.,"
+                android:fontFamily="@font/mvideo"
+                android:foregroundGravity="center"
+                android:maxLength="15"
+                android:padding="0dp"
+                android:singleLine="true"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:visibility="invisible"
+                app:fontFamily="@font/mvideo" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:padding="0dp"
+            app:layout_constraintTop_toBottomOf="@+id/layout4"
+            tools:ignore="MissingConstraints">
+
+            <TextView
+                android:id="@+id/txt2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/mvideo"
+                android:padding="0dp"
+                android:text="Задача"
+                android:textAlignment="viewStart"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="18sp"
+                app:fontFamily="@font/mvideo" />
+
+            <EditText
+                android:id="@+id/editText2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="33dp"
+                android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789абвгдеёжзиклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ.,"
+                android:fontFamily="@font/mvideo"
+                android:foregroundGravity="center"
+                android:gravity="center"
+                android:padding="0dp"
+                android:textAlignment="center"
+                android:textSize="18sp"
+                android:visibility="invisible"
+                app:fontFamily="@font/mvideo" />
+
+        </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

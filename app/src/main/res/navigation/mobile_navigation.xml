@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.dailytasks.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_global"
+        android:name="com.example.dailytasks.ui.global.GlobalFragment"
+        android:label="@string/title_target"
+        tools:layout="@layout/fragment_global" />
+
+    <fragment
+        android:id="@+id/navigation_success"
+        android:name="com.example.dailytasks.ui.success.SuccessFragment"
+        android:label="@string/title_success"
+        tools:layout="@layout/fragment_success" />
+
+    <fragment
+        android:id="@+id/navigation_setting"
+        android:name="com.example.dailytasks.SettingsFragment"
+        android:label="@string/title_setting"
+        tools:layout="@xml/root_preferences" />
+
+    <fragment
+        android:id="@+id/navigation_detail"
+        android:name="com.example.dailytasks.ui.detail.DetailItemFragment"
+        tools:layout="@layout/recycler_menu" />
+
+
+    <fragment
+        android:id="@+id/navigation_add"
+        android:name="com.example.dailytasks.ui.add.AddFrag"
+        android:label="@string/add_tasks"
+        tools:layout="@layout/fragment_add" />
+</navigation>

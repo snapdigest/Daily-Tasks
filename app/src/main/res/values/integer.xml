@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="animation_duration">300</integer>
+    <integer name="animation_alpha_duration_enter">150</integer>
+    <integer name="animation_alpha_duration_return">150</integer>
+    <integer name="animation_pop">200</integer>
+</resources>

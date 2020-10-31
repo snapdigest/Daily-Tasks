@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<transitionSet
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:transitionOrdering="together"
+    android:interpolator="@android:interpolator/fast_out_linear_in">
+
+    <transitionSet>
+
+        <!-- We start fade in animation later to fake that views appear in middle of screen -->
+        <fade
+            android:duration="@integer/animation_duration"
+            android:fadingMode="fade_in_out">
+        <targets>
+            <target android:excludeId="@+id/floatingActionButton"/>
+        </targets>
+        </fade>
+    </transitionSet>
+</transitionSet>
