@@ -118,12 +118,6 @@ public class HomeFragment extends Fragment implements StartDragListener, ItemCli
                 }
             }
         });
-        double d=1.1;
-        float f=2.2F;
-        f= (float) (d*2);
-        float max = 0;
-        if (d>f) max=(float)d; else max=f;
-
         adapter = new MyAdapter(listItems,this, this);
         ItemTouchHelper.Callback callback =
                 new ItemMoveCallback(adapter);
@@ -134,18 +128,8 @@ public class HomeFragment extends Fragment implements StartDragListener, ItemCli
             String action = bundle.getString(EXTRA_ACTION);
             final int pos = bundle.getInt(EXTRA_POSITION);
             String del = "delete";
-            String edit = "edit";
-            //switch (action) {
-            //    case "delete":
-            //        DeleteItem(pos);
-            //    case "edit":
-            //        EditItem(pos);
-            //}
             if (action == del){
                 DeleteItem(pos);
-            }
-            if (action == edit){
-                EditItem(pos);
             }
         }
         BottomNavigationView navView = MainActivity.navView;
@@ -235,18 +219,9 @@ public class HomeFragment extends Fragment implements StartDragListener, ItemCli
 
     private void DeleteItem(final int pos) {
         final RecyclerItem item = adapter.getData().get(pos);
-        String arg1 = bundle.getString(EXTRA_ARG1);
-        String tosuc = "tosuc";
         listItems.remove(pos);
         adapter.notifyItemRemoved(pos);
         bundle.clear();
-        if (arg1 == tosuc) {
-            Snackbar snackbar = Snackbar
-                    .make(MainActivity.container, "Отлично! Задача выполнена", Snackbar.LENGTH_LONG);
-            snackbar.setAnchorView(fab);
-            snackbar.show();
-        }
-        else {
             Snackbar snackbar = Snackbar
                     .make(MainActivity.container, "Задача удалена", Snackbar.LENGTH_LONG);
             snackbar.setAnchorView(fab);
@@ -257,27 +232,13 @@ public class HomeFragment extends Fragment implements StartDragListener, ItemCli
                     adapter.notifyItemInserted(pos);
                     recyclerView.scrollToPosition(pos);
                     Paper.book().write("item", listItems);
-                    // undo is selected, restore the deleted item
-                    //mAdapter.restoreItem(deletedItem, deletedIndex);
                 }
             });
             snackbar.show();
-        }
         Paper.book().write("item", listItems);
     }
 
-    private void EditItem(final int pos) {
-        String title = bundle.getString(EXTRA_ARG1);
-        String text = bundle.getString(EXTRA_ARG2);
-        RecyclerItem item = new RecyclerItem(title,text);
-        listItems.remove(pos);
-        adapter.notifyItemRemoved(pos);
-        listItems.add(pos, item);
-        adapter.notifyItemInserted(pos);
-        recyclerView.scrollToPosition(pos);
-        bundle.clear();
-        Paper.book().write("item", listItems);
-    }
+
 
     @Override
     public void onItemClick(int pos, RecyclerItem itemList, CardView shareItemView) {

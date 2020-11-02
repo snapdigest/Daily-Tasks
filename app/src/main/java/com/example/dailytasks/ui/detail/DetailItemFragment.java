@@ -22,24 +22,28 @@ import androidx.core.view.MenuItemCompat;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.transition.TransitionInflater;
 
+import com.example.dailytasks.ItemClickListener;
 import com.example.dailytasks.MainActivity;
 import com.example.dailytasks.MyAdapter;
 import com.example.dailytasks.R;
 import com.example.dailytasks.RecyclerItem;
 import com.example.dailytasks.ui.global.GlobalFragment;
 import com.example.dailytasks.ui.home.HomeFragment;
+import com.example.dailytasks.ui.home.StartDragListener;
 import com.example.dailytasks.ui.success.SuccessFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.List;
 
 import io.paperdb.Paper;
 
-public class DetailItemFragment extends Fragment {
+public class DetailItemFragment extends Fragment implements StartDragListener, ItemClickListener {
     private static final String EXTRA_TITLE = "task_item";
     private static final String EXTRA_TRANSITION_CARD = "transition_name";
     private static final String EXTRA_TRANSITION_TITLE = "transition_title";
@@ -52,12 +56,9 @@ public class DetailItemFragment extends Fragment {
     MyAdapter adapter;
     HomeFragment homefrag;
     FloatingActionButton fab;
-    TextView fab2;
     TextView gotosuccess;
     TextView textTitle;
     TextView textDescription;
-    TextView textedit;
-    TextView titleedit;
     String titletask;
     String titledesk;
     FragmentManager fm;
@@ -99,6 +100,7 @@ public class DetailItemFragment extends Fragment {
         fab.setImageResource(R.drawable.ic_baseline_create_24);
         BottomNavigationView navView = MainActivity.navView;
         navView.setVisibility(View.GONE);
+        adapter = new MyAdapter(HomeFragment.listItems,this, this);
         return inflater.inflate(R.layout.recycler_menu, container, false);
     }
 
@@ -115,7 +117,6 @@ public class DetailItemFragment extends Fragment {
         textTitle.setText(itemList.getTitle());
         textDescription = view.findViewById(R.id.txtDescription2);
         textDescription.setText(itemList.getDescription());
-        fab2 = view.findViewById(R.id.editbutton);
         gotosuccess = view.findViewById(R.id.gotosuccess);
         CardView card = view.findViewById(R.id.card1);
 
@@ -130,12 +131,6 @@ public class DetailItemFragment extends Fragment {
         descriptionBackground.setAlpha(20);
         Drawable titleBackground = view.findViewById(R.id.titleback).getBackground();
         titleBackground.setAlpha(20);
-        textedit = view.findViewById(R.id.descriptionedit);
-        textedit.setText(itemList.getDescription());
-        titleedit = view.findViewById(R.id.titleedit);
-        titleedit.setText(itemList.getTitle());
-        final TextInputLayout textFieldtitle = view.findViewById(R.id.textFieldtitle);
-        final TextInputLayout textFielddescr = view.findViewById(R.id.textFielddescr);
         //TextView share = view.findViewById(R.id.share);
         String fragment = bundle.getString(EXTRA_TAG);
         if (fragment.equals("SuccessFragment")) {
@@ -144,108 +139,35 @@ public class DetailItemFragment extends Fragment {
         else gotosuccess.setVisibility(view.VISIBLE);
         titletask = itemList.getTitle();
         titledesk = itemList.getDescription();
-        /*share.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View view){
-                Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_TEXT, textDescription.getText().toString());
-                intent.putExtra(Intent.EXTRA_TITLE, textTitle.getText().toString());
-                String chooserTitle = getString(R.string.chooser);
-                Intent chosenIntent = Intent.createChooser(intent, chooserTitle);
-                startActivity(chosenIntent);
-            }
-        });
-         */
         gotosuccess.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View view){
                 int pos = bundle.getInt(EXTRA_POSITION);
                 String fragment = bundle.getString(EXTRA_TAG);
                 String del = "delete";
-                String tosuc = "tosuc";
                 if (fragment.equals("HomeFragment")) {
-                    Fragment HomeFrag = HomeFragment.newInstance(pos, del, tosuc, null);
+                    HomeFragment.listItems.remove(pos);
+                        Snackbar snackbar = Snackbar
+                                .make(MainActivity.container, "Отлично! Задача выполнена", Snackbar.LENGTH_LONG);
+                        snackbar.setAnchorView(fab);
+                        snackbar.show();
+                    Paper.book().write("item", HomeFragment.listItems);
+                    //Fragment HomeFrag = HomeFragment.newInstance(pos, del, tosuc, null);
                 }
                 if (fragment.equals("GlobalFragment")) {
-                    Fragment GlobFrag = GlobalFragment.newInstance(pos, del, tosuc, null);
+                    GlobalFragment.listItems.remove(pos);
+                    Snackbar snackbar = Snackbar
+                            .make(MainActivity.container, "Отлично! Задача выполнена", Snackbar.LENGTH_LONG);
+                    snackbar.setAnchorView(fab);
+                    snackbar.show();
+                    Paper.book().write("global", GlobalFragment.listItems);
+                    //Fragment GlobFrag = GlobalFragment.newInstance(pos, del, tosuc, null);
                 }
                 SuccessFragment.listItems.add(new RecyclerItem(textTitle.getText().toString(), textDescription.getText().toString()));
                 Paper.book().write("success", SuccessFragment.listItems);
                 fm.popBackStack();
             }
         });
-        /*
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick (View view){
-                textTitle.setVisibility(view.GONE);
-                textDescription.setVisibility(view.GONE);
-                gotosuccess.setVisibility(view.GONE);
-                fab2.setVisibility(view.VISIBLE);
-                textFieldtitle.setVisibility(view.VISIBLE);
-                textFielddescr.setVisibility(view.VISIBLE);
-                fab.hide();
-                fab2.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick (View v){
-                        String titleendedit = titleedit.getText().toString();
-                        String textendedit = textedit.getText().toString();
-                        int pos = bundle.getInt(EXTRA_POSITION);
-                        String fragment = bundle.getString(EXTRA_TAG);
-                        String edit = "edit";
-                        if (fragment.equals("HomeFragment")) {
-                            Fragment HomeFrag = HomeFragment.newInstance(pos, edit, titleendedit, textendedit);
-                        }
-                        if (fragment.equals("GlobalFragment")) {
-                            Fragment GlobFrag = GlobalFragment.newInstance(pos, edit, titleendedit, textendedit);
-                        }
-                        textTitle.setVisibility(v.VISIBLE);
-                        textDescription.setVisibility(v.VISIBLE);
-                        textFieldtitle.setVisibility(v.GONE);
-                        textFielddescr.setVisibility(v.GONE);
-                        fab2.setVisibility(v.GONE);
-                        gotosuccess.setVisibility(v.VISIBLE);
-                        //fab.setImageResource(R.drawable.ic_baseline_create_24);
-                        textTitle.setText(titleendedit);
-                        textDescription.setText(textendedit);
-                        InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
-                        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-                        fab.show();
-                    }
-                });
-                //fab.setImageResource(R.drawable.ic_baseline_check_24);
-                textFielddescr.setEndIconOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        String titleendedit = titleedit.getText().toString();
-                        String textendedit = textedit.getText().toString();
-                        int pos = bundle.getInt(EXTRA_POSITION);
-                        String fragment = bundle.getString(EXTRA_TAG);
-                        String edit = "edit";
-                        if (fragment.equals("HomeFragment")) {
-                            Fragment HomeFrag = HomeFragment.newInstance(pos, edit, titleendedit, textendedit);
-                        }
-                        if (fragment.equals("GlobalFragment")) {
-                            Fragment GlobFrag = GlobalFragment.newInstance(pos, edit, titleendedit, textendedit);
-                        }
-                        textTitle.setVisibility(v.VISIBLE);
-                        textDescription.setVisibility(v.VISIBLE);
-                        textFieldtitle.setVisibility(v.GONE);
-                        textFielddescr.setVisibility(v.GONE);
-                        //fab.setImageResource(R.drawable.ic_baseline_create_24);
-                        textTitle.setText(titleendedit);
-                        textDescription.setText(textendedit);
-                        InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
-                        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-                        fab.show();
-                    }
-                });
-            }
-        });
-         */
-        //textTitle.setTransitionName(transitionTitle);
-        //startPostponedEnterTransition();
     }
 
     @Override
@@ -293,13 +215,13 @@ public class DetailItemFragment extends Fragment {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(final MenuItem item) {
         switch(item.getItemId()) {
             case android.R.id.home:
                 fm.popBackStack();
                 return true;
             case R.id.delete:
-                int pos = bundle.getInt(EXTRA_POSITION);
+                final int pos = bundle.getInt(EXTRA_POSITION);
                 String fragment = bundle.getString(EXTRA_TAG);
                 String del = "delete";
                 if (fragment.equals("HomeFragment")) {
@@ -332,5 +254,15 @@ public class DetailItemFragment extends Fragment {
         //super.onPause();
         fab.show();
         //getFragmentManager().beginTransaction().addToBackStack(TAG).commit();
+    }
+
+    @Override
+    public void onItemClick(int pos, RecyclerItem itemList, CardView shareItemView) {
+
+    }
+
+    @Override
+    public void requestDrag(RecyclerView.ViewHolder viewHolder) {
+
     }
 }

@@ -85,17 +85,16 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
-                @Override
-                public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
+            @Override
+            public void onDestinationChanged(@NonNull NavController controller, @NonNull NavDestination destination, @Nullable Bundle arguments) {
                 if(destination.getId() == R.id.navigation_success || destination.getId() == R.id.navigation_add) {
                     navView.setVisibility(View.GONE);
                 }
                 else {
                     navView.setVisibility(View.VISIBLE);
-        }
-        }
+                }
+            }
         });
-        //NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
         textInputZagol = findViewById(R.id.edittext1);
         fab = findViewById(R.id.floatingActionButton);
@@ -164,6 +163,11 @@ public class MainActivity extends AppCompatActivity implements SharedPreferences
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
     }
 
     @Override

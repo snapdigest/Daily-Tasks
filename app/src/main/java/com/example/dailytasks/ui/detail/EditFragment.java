@@ -29,6 +29,8 @@ import com.example.dailytasks.ui.success.SuccessFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import io.paperdb.Paper;
+
 
 public class EditFragment extends Fragment {
 
@@ -96,22 +98,20 @@ public class EditFragment extends Fragment {
                 String titleendedit = titleedit.getText().toString();
                 String textendedit = textedit.getText().toString();
                 int pos = bundle.getInt(EXTRA_POSITION);
-                //String tag = getArguments().getString(EXTRA_TAG);
                 String fragment = bundle.getString(EXTRA_TAG);
-                String edit = "edit";
+                RecyclerItem item = new RecyclerItem(titleendedit,textendedit);
                 if (fragment.equals("HomeFragment")) {
-                    Fragment HomeFrag = HomeFragment.newInstance(pos, edit, titleendedit, textendedit);
+                    HomeFragment.listItems.remove(pos);
+                    HomeFragment.listItems.add(pos, item);
+                    Paper.book().write("item", HomeFragment.listItems);
                 }
                 if (fragment.equals("GlobalFragment")) {
-                    Fragment GlobFrag = GlobalFragment.newInstance(pos, edit, titleendedit, textendedit);
+                    GlobalFragment.listItems.remove(pos);
+                    GlobalFragment.listItems.add(pos, item);
+                    Paper.book().write("global", GlobalFragment.listItems);
                 }
                 Fragment DetailFragment = DetailItemFragment.newInstance(pos, itemList, null, fragment);
                 fm.popBackStack();
-                //getFragmentManager()
-                //        .beginTransaction()
-                //        .addSharedElement(MainActivity.fab, ViewCompat.getTransitionName(MainActivity.fab))
-                //        .replace(R.id.nav_host_fragment, DetailFragment)
-                //       .commit();
                  }
         });
     }
